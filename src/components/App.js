@@ -2,7 +2,7 @@ import React from 'react';
 import Input from './Input'
 import ItemList from './ItemList'
 import db from '../database/firestore'
-import './App.css';
+import './App.sass';
 
 class App extends React.Component {
   constructor(props){
@@ -52,11 +52,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-          <Input handleSubmit={this.handleSubmit}/>
-
-          <ItemList notes={this.state.notes} handleDelete={this.handleDelete}/>
-      </div>
+      <section className='section' >
+        <div className='container'>
+          <div className='columns is-centered'>
+            <div className='column is-half'>
+              <p className='title has-text-white has-text-centered'>Notes App</p>
+              <Input handleSubmit={this.handleSubmit}/>
+              <ItemList notes={this.state.notes} handleDelete={this.handleDelete}/> 
+            </div>
+          </div>
+        </div>
+      </section>
     );
   }
 }

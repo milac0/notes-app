@@ -3,14 +3,14 @@ import Item from './Item'
 
 const ItemList = (props) => {
     return (
-        <ol>
+        <ul>
             {props.notes.map((note, i) => 
             <Item 
             note={note}
             key={i} 
             handleDelete={()=>props.handleDelete(note.id)}/>
             )}
-        </ol>
+        </ul>
     );
 };
 
