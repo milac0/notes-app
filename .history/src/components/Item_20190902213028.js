@@ -10,14 +10,10 @@ const Item = (props) => {
         <article className="message is-dark">
                 <div className='message-header'>
                     <p>{props.note.title}</p>
-                    <button 
-                        className="delete has-background-danger" 
-                        aria-label="delete" 
-                        onClick={props.handleDelete}>
-                   </button>
+                    <button className="delete has-background-danger" aria-label="delete" onClick={props.handleDelete}></button>
                 </div>
-                <div className="message-body">
-                    {props.note.description}
+                <div class="message-body">
+                {props.note.description}
                 </div>
 
         </article>

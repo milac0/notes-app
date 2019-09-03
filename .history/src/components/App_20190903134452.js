@@ -2,34 +2,39 @@ import React from 'react';
 import Header from './Header'
 import Input from './Input'
 import ItemList from './ItemList'
-import db from '../database/firestore'
+import { db, auth } from '../database/firestore'
 import './App.sass';
 
 class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      user: null,
       notes: []
     }
   }
 
 
 
-  // authListener = () => {
-  //   auth.onAuthStateChanged(function(user) {
-  //     if (user) {
-  //       // User is signed in.
-        
-  //     } else {
-  //       // User is signed out.
-
-  //     }
-  //   });
-  // }
+  authListener = () => {
+    auth.onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        // ...
+      } else {
+        // User is signed out.
+        // ...
+      }
+    });
+  }
 
   componentDidMount = () => {
-    // this.authListener()
     db.collection('notes').get()
       .then(snapshot => { 
           let notes = []

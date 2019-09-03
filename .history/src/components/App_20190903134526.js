@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header'
 import Input from './Input'
 import ItemList from './ItemList'
-import db from '../database/firestore'
+import { db, auth } from '../database/firestore'
 import './App.sass';
 
 class App extends React.Component {
@@ -16,20 +16,19 @@ class App extends React.Component {
 
 
 
-  // authListener = () => {
-  //   auth.onAuthStateChanged(function(user) {
-  //     if (user) {
-  //       // User is signed in.
+  authListener = () => {
+    auth.onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
         
-  //     } else {
-  //       // User is signed out.
+      } else {
+        // User is signed out.
 
-  //     }
-  //   });
-  // }
+      }
+    });
+  }
 
   componentDidMount = () => {
-    // this.authListener()
     db.collection('notes').get()
       .then(snapshot => { 
           let notes = []

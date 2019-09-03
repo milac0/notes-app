@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header'
 import Input from './Input'
 import ItemList from './ItemList'
-import db from '../database/firestore'
+import firebase from '../database/firestore'
 import './App.sass';
 
 class App extends React.Component {
@@ -16,21 +16,21 @@ class App extends React.Component {
 
 
 
-  // authListener = () => {
-  //   auth.onAuthStateChanged(function(user) {
-  //     if (user) {
-  //       // User is signed in.
+  authListener = () => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
         
-  //     } else {
-  //       // User is signed out.
+      } else {
+        // User is signed out.
 
-  //     }
-  //   });
-  // }
+      }
+    });
+  }
 
   componentDidMount = () => {
-    // this.authListener()
-    db.collection('notes').get()
+    this.authListener()
+    firebase.firestore().collection('notes').get()
       .then(snapshot => { 
           let notes = []
           snapshot.forEach(doc => {
@@ -49,7 +49,7 @@ class App extends React.Component {
     e.preventDefault()
     const title = e.target.elements.title.value
     const description = e.target.elements.description.value
-    db.collection('notes').add({
+    firebase.firestore().collection('notes').add({
       title, description
     }).then(ref => {
       this.setState({
@@ -62,7 +62,7 @@ class App extends React.Component {
   }
 
   handleDelete = (id) => {
-    db.collection('notes').doc(id).delete()
+    firebase.firestore().collection('notes').doc(id).delete()
     const notes = this.state.notes.filter(note => note.id !== id)
     this.setState({notes})
   }

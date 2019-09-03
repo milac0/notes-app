@@ -16,20 +16,20 @@ class App extends React.Component {
 
 
 
-  // authListener = () => {
-  //   auth.onAuthStateChanged(function(user) {
-  //     if (user) {
-  //       // User is signed in.
+  authListener = () => {
+    auth.onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
         
-  //     } else {
-  //       // User is signed out.
+      } else {
+        // User is signed out.
 
-  //     }
-  //   });
-  // }
+      }
+    });
+  }
 
   componentDidMount = () => {
-    // this.authListener()
+    this.authListener()
     db.collection('notes').get()
       .then(snapshot => { 
           let notes = []

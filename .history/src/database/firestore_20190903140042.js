@@ -3,7 +3,7 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API,
+    apiKey: process.env.local.REACT_APP_FIREBASE_API,
     authDomain: "notes-app-597c2.firebaseapp.com",
     databaseURL: "https://notes-app-597c2.firebaseio.com",
     projectId: "notes-app-597c2",
@@ -14,7 +14,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-// const auth = firebase.auth()
+const auth = firebase.auth()
 const db = firebase.firestore()
 
-export default db
+export { auth, db }

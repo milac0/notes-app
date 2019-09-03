@@ -9,27 +9,11 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      user: null,
       notes: []
     }
   }
 
-
-
-  // authListener = () => {
-  //   auth.onAuthStateChanged(function(user) {
-  //     if (user) {
-  //       // User is signed in.
-        
-  //     } else {
-  //       // User is signed out.
-
-  //     }
-  //   });
-  // }
-
   componentDidMount = () => {
-    // this.authListener()
     db.collection('notes').get()
       .then(snapshot => { 
           let notes = []
@@ -69,11 +53,12 @@ class App extends React.Component {
 
   render() {
     return (
+      <Header />
       <section className='section' >
         <div className='container'>
           <div className='columns is-centered'>
             <div className='column is-half'>
-              <Header />
+              <p className='title has-text-white has-text-centered'>Notes App</p>
               <Input handleSubmit={this.handleSubmit}/>
               <ItemList notes={this.state.notes} handleDelete={this.handleDelete}/> 
             </div>
